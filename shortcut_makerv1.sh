@@ -50,7 +50,6 @@ if [ ${imageconfirm,,} == 'y' ]; then
 		((++directory_count))
 	done
 	echo -ne "#> "; read image_choice
-	#echo ${img_array[$image_choice]}
 	thumbnail_code="catimg -H 37 ${img_array[$image_choice]}"
 elif [ ${imageconfirm,,} == 'n' ]; then
 	:
