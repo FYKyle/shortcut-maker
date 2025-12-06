@@ -21,23 +21,23 @@ echo -ne 'Platform: '; read platform
 if [ $platform == 'linux' ]; then 
 	echo -ne "Executable ?> "; read executable
 	printf -v executable "%q" "$executable"
-	command="cd $currentdir && nohup ./$executable &> /dev/null"
+	command="cd $currentdir && nohup ./$executable &> /dev/null & disown"
 fi
 #--- SNES9x --- 
 if [ $platform == 'snes' ]; then 
 	echo -ne "Rom: "; read rom
 	printf -v rom "%q" "$rom"
-	command="cd $snes9x_appimg_loc && ./Snes9x-1.63-x86_64.AppImage $rom" 
+	command="cd $snes9x_appimg_loc && ./Snes9x-1.63-x86_64.AppImage $rom &> /dev/null & disown" 
 fi
 #--- RPG MAKER --- 
 if [ $platform == 'rpgmaker' ]; then 
-	command="cd $currentdir && nohup rpgmaker-linux &> /dev/null"
+	command="cd $currentdir && nohup rpgmaker-linux &> /dev/null & disown"
 fi
 #--- MAME --- 
 if [ $platform == 'mame' ]; then 
 	echo -ne "Bios: "; read bios
 	echo -ne "Game Zip: "; read gamezip
-	command="nohup mame -bios $bios ${gamezip}.zip &> /dev/null"
+	command="nohup mame -bios $bios ${gamezip}.zip &> /dev/null & disown"
 fi
 #--- STEAM ---
 if [ $platform == 'steam' ]; then 
